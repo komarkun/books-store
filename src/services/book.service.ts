@@ -74,6 +74,34 @@ export const createBook = createRoute({
 })
 
 // svc Put a book --> modify full by id
+export const updateBook = createRoute({
+  method: 'put',
+  path: '/{id}',
+  request: {
+    params: ParamsSchema,
+    body: {
+      content: {
+        'application/json': {
+          schema: CreateBookSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: BookSchema,
+        },
+      },
+      description: 'The updated books',
+    },
+    404: {
+      description: 'Book not found',
+    },
+  },
+})
+
 // svc Patch a book --> modify partial id
 // svc Delete a book --> by id
 
