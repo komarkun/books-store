@@ -14,7 +14,7 @@ app.doc('/doc', {
   openapi: '3.0.0',
   info: {
     version: '1.0.0',
-    title: 'Expenses Tracker API',
+    title: 'Books Store API',
   },
 })
 
