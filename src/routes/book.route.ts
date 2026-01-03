@@ -1,5 +1,5 @@
 import { OpenAPIHono } from '@hono/zod-openapi'
-import { getAllBooks, getBookById, createBook, updateBook } from "../services/book.service"
+import { getAllBooks, getBookById, createBook, updateBook, updateBookPatched } from "../services/book.service"
 import fakeBooks from "../config/db.fake"
 
 const bookRouter = new OpenAPIHono()
@@ -38,6 +38,20 @@ bookRouter.openapi(updateBook, (c) => {
     return c.notFound()
   }
   fakeBooks[index] = { ...data, id }
+  return c.json(fakeBooks[index], 200)
+})
+
+// Route to PATCH a book --> modify partially
+bookRouter.openapi(updateBookPatched, (c) => {
+  const { id: idParam } = c.req.valid('param')
+  const id = Number.parseInt(idParam)
+  const data = c.req.valid('json')
+  const index = fakeBooks.findIndex(e => e.id === id)
+  const book = fakeBooks[index]
+  if (!book) {
+    return c.notFound()
+  }
+  fakeBooks[index] = { ...book, ...data }
   return c.json(fakeBooks[index], 200)
 })
 
