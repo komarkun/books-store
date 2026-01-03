@@ -42,19 +42,36 @@ This project demonstrates a clean backend architecture with:
 
 ---
 
-## 📂 Project Structure (Example)
+## 📂 Project Structure
 
 ```text
 src/
-├── index.ts            # App entry point
-├── routes/
-│   └── book.route.ts   # Book routes (CRUD)
-├── schemas/
-│   └── book.schema.ts  # Zod schemas
+├── app.ts
+├── index.ts
+├── config/
+│   ├── db.fake.ts          # in-memory fake DB (v1)
+│   └── db.ts               # bun:sql Postgres client
+├── db/
+│   └── migrations/
+│       └── 001_schema.sql  # database schema
 ├── middlewares/
-    └── auth.ts         # Bearer auth middleware
-
-````
+│   └── bearer.middlewares.ts
+├── routes/
+│   ├── v1/
+│   │   └── book.route.ts
+│   └── v2/
+│       └── book.route.ts
+├── schemas/
+│   ├── v1/
+│   │   └── book.schema.ts
+│   └── v2/
+│       └── book.schema.ts
+└── services/
+    ├── v1/
+    │   └── book.service.ts
+    └── v2/
+        └── book.service.ts
+```
 
 ---
 
@@ -137,6 +154,13 @@ Swagger will automatically send:
 ```http
 Authorization: Bearer super-secret-token
 ```
+
+---
+
+## 📦 API Versions
+
+- `/api/v1/books` — original fake database, in-memory data (behavior unchanged)
+- `/api/v2/books` — backed by PostgreSQL using `DATABASE_URL` or the `POSTGRES_*` variables. Migrations run at startup to keep the `books` table ready.
 
 ---
 

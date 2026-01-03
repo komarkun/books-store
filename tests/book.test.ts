@@ -20,13 +20,13 @@ describe('Books API', () => {
 
   describe('Authorization', () => {
     it('should return 401 when no token is provided', async () => {
-      const res = await app.fetch(new Request(`${BASE_URL}/api/books`))
+      const res = await app.fetch(new Request(`${BASE_URL}/api/v1/books`))
       expect(res.status).toBe(401)
     })
 
     it('should return 401 with invalid token', async () => {
       const res = await app.fetch(
-        new Request(`${BASE_URL}/api/books`, {
+        new Request(`${BASE_URL}/api/v1/books`, {
           headers: { Authorization: 'Bearer invalid_token' },
         })
       )
@@ -35,10 +35,10 @@ describe('Books API', () => {
   })
 
   describe('CRUD Operations', () => {
-    describe('POST /api/books', () => {
+    describe('POST /api/v1/books', () => {
       it('should return 400 for invalid data (short title)', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books`, {
+          new Request(`${BASE_URL}/api/v1/books`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ describe('Books API', () => {
 
       it('should return 400 for negative price', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books`, {
+          new Request(`${BASE_URL}/api/v1/books`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ describe('Books API', () => {
         }
 
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books`, {
+          new Request(`${BASE_URL}/api/v1/books`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -101,10 +101,10 @@ describe('Books API', () => {
       })
     })
 
-    describe('GET /api/books', () => {
+    describe('GET /api/v1/books', () => {
       it('should return a list of books', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books`, {
+          new Request(`${BASE_URL}/api/v1/books`, {
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
         )
@@ -115,10 +115,10 @@ describe('Books API', () => {
       })
     })
 
-    describe('GET /api/books/:id', () => {
+    describe('GET /api/v1/books/:id', () => {
       it('should return 404 for non-existent book', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/999999`, {
+          new Request(`${BASE_URL}/api/v1/books/999999`, {
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
         )
@@ -128,7 +128,7 @@ describe('Books API', () => {
       it('should return the created book by ID', async () => {
         expect(createdBookId).toBeDefined()
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
         )
@@ -138,7 +138,7 @@ describe('Books API', () => {
       })
     })
 
-    describe('PUT /api/books/:id', () => {
+    describe('PUT /api/v1/books/:id', () => {
       it('should update the entire book record', async () => {
         expect(createdBookId).toBeDefined()
         const updatedPayload = {
@@ -148,7 +148,7 @@ describe('Books API', () => {
         }
 
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -165,13 +165,13 @@ describe('Books API', () => {
       })
     })
 
-    describe('PATCH /api/books/:id', () => {
+    describe('PATCH /api/v1/books/:id', () => {
       it('should partially update the book record', async () => {
         expect(createdBookId).toBeDefined()
         const patchPayload = { price: 55000 }
 
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -187,11 +187,11 @@ describe('Books API', () => {
       })
     })
 
-    describe('DELETE /api/books/:id', () => {
+    describe('DELETE /api/v1/books/:id', () => {
       it('should delete the created book', async () => {
         expect(createdBookId).toBeDefined()
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
@@ -201,7 +201,7 @@ describe('Books API', () => {
 
       it('should return 404 when trying to GET the deleted book', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
         )
@@ -210,7 +210,7 @@ describe('Books API', () => {
 
       it('should return 404 when trying to DELETE a non-existent book', async () => {
         const res = await app.fetch(
-          new Request(`${BASE_URL}/api/books/${createdBookId}`, {
+          new Request(`${BASE_URL}/api/v1/books/${createdBookId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${TOKEN}` },
           })
@@ -220,4 +220,3 @@ describe('Books API', () => {
     })
   })
 })
-

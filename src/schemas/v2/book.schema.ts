@@ -12,6 +12,12 @@ export const BookSchema = z.object({
   }),
   summary: z.string().min(10).max(200).openapi({
     example: 'Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor pulvinar vivamus fringilla lacus nec metus bibendum egestas iaculis massa nisl malesuada lacinia integer nunc posuere ut hendrerit.'
+  }),
+  created_at: z.string().datetime().openapi({
+    example: '2024-01-01T12:00:00.000Z',
+  }),
+  updated_at: z.string().datetime().openapi({
+    example: '2024-01-02T15:30:00.000Z',
   })
 }).openapi('Book')
 
@@ -38,3 +44,9 @@ export const ParamsSchema = z.object({
 })
 
 export const UpdateBookSchema = CreateBookSchema.partial().openapi('UpdateBook')
+
+export const ErrorSchema = z.object({
+  message: z.string().openapi({
+    example: 'Internal Server Error',
+  }),
+}).openapi('Error')
