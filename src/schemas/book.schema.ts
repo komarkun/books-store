@@ -37,4 +37,4 @@ export const ParamsSchema = z.object({
   }),
 })
 
-export const UpdateBookSchema = CreateBookSchema.partial().openapi('UpdateExpense')
+export const UpdateBookSchema = CreateBookSchema.partial().openapi('UpdateBook')
