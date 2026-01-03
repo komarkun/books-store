@@ -1,8 +1,22 @@
 import { OpenAPIHono } from '@hono/zod-openapi'
 import { getAllBooks, getBookById, createBook, updateBook, updateBookPatched, deleteBookById } from "../services/book.service"
 import fakeBooks from "../config/db.fake"
+import { bearerAuthMiddleware } from "../middlewares/bearer.middlewares.ts"
 
 const bookRouter = new OpenAPIHono()
+
+bookRouter.openAPIRegistry.registerComponent(
+  'securitySchemes',
+  'Bearer',
+  {
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT', // optional tapi bagus
+  }
+)
+
+// middleware to protech API using bearer Token
+bookRouter.use('/*', bearerAuthMiddleware)
 
 // Route to GET all books
 bookRouter.openapi(getAllBooks, (c) => {
