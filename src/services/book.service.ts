@@ -8,6 +8,11 @@ import { BookSchema, ParamsSchema, CreateBookSchema, UpdateBookSchema } from "..
 export const getAllBooks = createRoute({
   method: 'get',
   path: '/',
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       content: {
@@ -29,6 +34,11 @@ export const getBookById = createRoute({
   request: {
     params: ParamsSchema,
   },
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       content: {
@@ -59,6 +69,11 @@ export const createBook = createRoute({
       },
     },
   },
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     201: {
       content: {
@@ -87,6 +102,11 @@ export const updateBook = createRoute({
       },
     },
   },
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       content: {
@@ -116,6 +136,11 @@ export const updateBookPatched = createRoute({
       },
     },
   },
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       content: {
@@ -137,6 +162,11 @@ export const deleteBookById = createRoute({
   request: {
     params: ParamsSchema,
   },
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       content: {
