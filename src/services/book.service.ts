@@ -22,7 +22,7 @@ export const getAllBooks = createRoute({
           }),
         },
       },
-      description: 'Retrieve the list of expenses',
+      description: 'Retrieve the list of books store',
     },
   },
 })
