@@ -37,7 +37,8 @@ bookRouter.openapi(getBookById, (c) => {
 // Route to POST a book
 bookRouter.openapi(createBook, (c) => {
   const data = c.req.valid('json')
-  const newBook = { id: fakeBooks.length + 1, ...data }
+  const nextId = fakeBooks.length > 0 ? Math.max(...fakeBooks.map(b => b.id)) + 1 : 1
+  const newBook = { id: nextId, ...data }
   fakeBooks.push(newBook)
   return c.json({ book: newBook }, 201)
 })

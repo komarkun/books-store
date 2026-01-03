@@ -22,7 +22,7 @@ export const getAllBooks = createRoute({
           }),
         },
       },
-      description: 'Retrieve the list of books store',
+      description: 'Retrieve the list of books from the store',
     },
   },
 })
@@ -114,7 +114,7 @@ export const updateBook = createRoute({
           schema: BookSchema,
         },
       },
-      description: 'The updated books',
+      description: 'The updated book',
     },
     404: {
       description: 'Book not found',

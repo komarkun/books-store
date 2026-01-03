@@ -12,7 +12,7 @@ type Book = {
   id: number
   title: string
   price: number
-  sumary: string
+  summary: string
 }
 
 describe('Books API', () => {
@@ -47,7 +47,7 @@ describe('Books API', () => {
             body: JSON.stringify({
               title: 'Ab', // Min 3
               price: 1000,
-              sumary: 'Valid summary for testing purposes',
+              summary: 'Valid summary for testing purposes',
             }),
           })
         )
@@ -65,7 +65,7 @@ describe('Books API', () => {
             body: JSON.stringify({
               title: 'Valid Title',
               price: -100,
-              sumary: 'Valid summary for testing purposes',
+              summary: 'Valid summary for testing purposes',
             }),
           })
         )
@@ -76,7 +76,7 @@ describe('Books API', () => {
         const payload = {
           title: 'The Great Adventure',
           price: 45000,
-          sumary: 'A thrilling journey through the unknown lands of testing.',
+          summary: 'A thrilling journey through the unknown lands of testing.',
         }
 
         const res = await app.fetch(
@@ -95,7 +95,7 @@ describe('Books API', () => {
         expect(body.book).toHaveProperty('id')
         expect(body.book.title).toBe(payload.title)
         expect(body.book.price).toBe(payload.price)
-        expect(body.book.sumary).toBe(payload.sumary)
+        expect(body.book.summary).toBe(payload.summary)
 
         createdBookId = body.book.id
       })
@@ -144,7 +144,7 @@ describe('Books API', () => {
         const updatedPayload = {
           title: 'The Great Adventure (Updated)',
           price: 50000,
-          sumary: 'An even more thrilling journey through the unknown lands.',
+          summary: 'An even more thrilling journey through the unknown lands.',
         }
 
         const res = await app.fetch(

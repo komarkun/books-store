@@ -1,6 +1,10 @@
 import type { MiddlewareHandler } from 'hono'
 
-const API_TOKEN = process.env.API_BEARER_TOKEN!
+const API_TOKEN = process.env.API_BEARER_TOKEN
+
+if (!API_TOKEN) {
+  throw new Error('API_BEARER_TOKEN environment variable is not set')
+}
 
 export const bearerAuthMiddleware: MiddlewareHandler = async (c, next) => {
   const auth = c.req.header('authorization')
