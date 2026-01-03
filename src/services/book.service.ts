@@ -1,6 +1,6 @@
 import { createRoute } from '@hono/zod-openapi'
 import { z } from '@hono/zod-openapi'
-import { BookSchema, ParamsSchema } from "../schemas/book.schema"
+import { BookSchema, ParamsSchema, CreateBookSchema } from "../schemas/book.schema"
 
 
 // svc Get all books
@@ -47,6 +47,30 @@ export const getBookById = createRoute({
 })
 
 // svc Post a book
+export const createBook = createRoute({
+  method: 'post',
+  path: '/',
+  request: {
+    body: {
+      content: {
+        'application/json': {
+          schema: CreateBookSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    201: {
+      content: {
+        'application/json': {
+          schema: BookSchema,
+        },
+      },
+      description: 'The created book',
+    },
+  },
+})
+
 // svc Put a book --> modify full by id
 // svc Patch a book --> modify partial id
 // svc Delete a book --> by id
