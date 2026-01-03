@@ -63,7 +63,9 @@ export const createBook = createRoute({
     201: {
       content: {
         'application/json': {
-          schema: BookSchema,
+          schema: z.object({
+            book: BookSchema
+          })
         },
       },
       description: 'The created book',
