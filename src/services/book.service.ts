@@ -1,6 +1,6 @@
 import { createRoute } from '@hono/zod-openapi'
 import { z } from '@hono/zod-openapi'
-import { BookSchema, ParamsSchema, CreateBookSchema } from "../schemas/book.schema"
+import { BookSchema, ParamsSchema, CreateBookSchema, UpdateBookSchema } from "../schemas/book.schema"
 
 
 // svc Get all books
@@ -103,6 +103,33 @@ export const updateBook = createRoute({
 })
 
 // svc Patch a book --> modify partial id
+export const updateBookPatched = createRoute({
+  method: 'patch',
+  path: '/{id}',
+  request: {
+    params: ParamsSchema,
+    body: {
+      content: {
+        'application/json': {
+          schema: UpdateBookSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: BookSchema,
+        },
+      },
+      description: 'The patched Book',
+    },
+    404: {
+      description: 'Book not found',
+    },
+  },
+})
 // svc Delete a book --> by id
 
 
