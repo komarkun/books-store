@@ -131,5 +131,24 @@ export const updateBookPatched = createRoute({
   },
 })
 // svc Delete a book --> by id
-
+export const deleteBookById = createRoute({
+  method: 'delete',
+  path: '/{id}',
+  request: {
+    params: ParamsSchema,
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: BookSchema,
+        },
+      },
+      description: 'The deleted book',
+    },
+    404: {
+      description: 'Book not found',
+    },
+  },
+})
 
