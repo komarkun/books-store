@@ -1,5 +1,5 @@
 import { z } from '@hono/zod-openapi'
-import { BookSchema } from "../schemas/book.schema"
+import { BookSchema } from "../schemas/v1/book.schema"
 
 // In-memory data for now, as in the original code
 type Book = z.infer<typeof BookSchema>

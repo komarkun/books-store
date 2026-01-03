@@ -1,6 +1,6 @@
 import { createRoute } from '@hono/zod-openapi'
 import { z } from '@hono/zod-openapi'
-import { BookSchema, ParamsSchema, CreateBookSchema, UpdateBookSchema } from "../schemas/book.schema"
+import { BookSchema, ParamsSchema, CreateBookSchema, UpdateBookSchema, ErrorSchema } from "../../schemas/v2/book.schema"
 
 
 // svc Get all books
@@ -23,6 +23,14 @@ export const getAllBooks = createRoute({
         },
       },
       description: 'Retrieve the list of books from the store',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
     },
   },
 })
@@ -51,7 +59,20 @@ export const getBookById = createRoute({
       description: 'Retrieve a single book',
     },
     404: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
       description: 'Book not found',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
     },
   },
 })
@@ -85,6 +106,14 @@ export const createBook = createRoute({
       },
       description: 'The created book',
     },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
+    },
   },
 })
 
@@ -117,7 +146,20 @@ export const updateBook = createRoute({
       description: 'The updated book',
     },
     404: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
       description: 'Book not found',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
     },
   },
 })
@@ -151,7 +193,20 @@ export const updateBookPatched = createRoute({
       description: 'The patched Book',
     },
     404: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
       description: 'Book not found',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
     },
   },
 })
@@ -177,8 +232,20 @@ export const deleteBookById = createRoute({
       description: 'The deleted book',
     },
     404: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
       description: 'Book not found',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: ErrorSchema,
+        },
+      },
+      description: 'Internal Server Error',
     },
   },
 })
-
