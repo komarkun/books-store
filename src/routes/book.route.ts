@@ -1,5 +1,5 @@
 import { OpenAPIHono } from '@hono/zod-openapi'
-import { getAllBooks, getBookById, createBook, updateBook, updateBookPatched } from "../services/book.service"
+import { getAllBooks, getBookById, createBook, updateBook, updateBookPatched, deleteBookById } from "../services/book.service"
 import fakeBooks from "../config/db.fake"
 
 const bookRouter = new OpenAPIHono()
@@ -55,5 +55,16 @@ bookRouter.openapi(updateBookPatched, (c) => {
   return c.json(fakeBooks[index], 200)
 })
 
+// Route to DELETE a book by id
+bookRouter.openapi(deleteBookById, (c) => {
+  const { id: idParam } = c.req.valid('param')
+  const id = Number.parseInt(idParam)
+  const index = fakeBooks.findIndex(e => e.id === id)
+  if (index === -1) {
+    return c.notFound()
+  }
+  const deletedBooks = fakeBooks.splice(index, 1)[0]
+  return c.json(deletedBooks, 200)
+})
 
 export default bookRouter
