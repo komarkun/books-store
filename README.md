@@ -63,8 +63,9 @@ src/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/books-store.git
+git clone https://github.com/komarkun/books-store.git
 cd books-store
+cp .env.example .env
 ```
 
 ### 2. Install dependencies
@@ -96,7 +97,7 @@ http://localhost:3000
 Swagger UI is available at:
 
 ```text
-http://localhost:3000/doc
+http://localhost:3000/api/docs
 ```
 
 Features:
@@ -123,7 +124,7 @@ API_BEARER_TOKEN=super-secret-token
 
 ### Using Swagger
 
-1. Open `/doc`
+1. Open `/api/doc`
 2. Click **Authorize**
 3. Enter token:
 
