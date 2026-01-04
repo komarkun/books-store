@@ -6,6 +6,7 @@ import { BookSchema, ParamsSchema, CreateBookSchema, UpdateBookSchema, ErrorSche
 // svc Get all books
 
 export const getAllBooks = createRoute({
+  tags: ['get'],
   method: 'get',
   path: '/',
   security: [
@@ -37,6 +38,7 @@ export const getAllBooks = createRoute({
 
 // svc Get a book by id
 export const getBookById = createRoute({
+  tags: ['get'],
   method: 'get',
   path: '/{id}',
   request: {
@@ -79,6 +81,7 @@ export const getBookById = createRoute({
 
 // svc Post a book
 export const createBook = createRoute({
+  tags: ['create'],
   method: 'post',
   path: '/',
   request: {
@@ -119,6 +122,7 @@ export const createBook = createRoute({
 
 // svc Put a book --> modify full by id
 export const updateBook = createRoute({
+  tags: ['update'],
   method: 'put',
   path: '/{id}',
   request: {
@@ -166,6 +170,7 @@ export const updateBook = createRoute({
 
 // svc Patch a book --> modify partial id
 export const updateBookPatched = createRoute({
+  tags: ['update'],
   method: 'patch',
   path: '/{id}',
   request: {
@@ -212,6 +217,7 @@ export const updateBookPatched = createRoute({
 })
 // svc Delete a book --> by id
 export const deleteBookById = createRoute({
+  tags: ['delete'],
   method: 'delete',
   path: '/{id}',
   request: {
